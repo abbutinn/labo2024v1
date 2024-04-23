@@ -5,18 +5,23 @@
 rm(list = ls(all.names = TRUE)) # remove all objects
 gc(full = TRUE) # garbage collection
 
-require("rlang")
-require("yaml")
+
+#require("rlang")
+#require("yaml")
 #require("data.table")
+library("rlang")
+library("yaml")
 library("data.table")
 
-require("ParamHelpers")
+#require("ParamHelpers")
+library("ParamHelpers")
+
 
 # creo environment global
 envg <- env()
 
 envg$EXPENV <- list()
-envg$EXPENV$exp_dir <- "~/buckets/b1/exp/"
+envg$EXPENV$exp_dir <- "~/buckets/b1/exp/agu_guante/"
 envg$EXPENV$wf_dir <- "~/buckets/b1/flow/"
 envg$EXPENV$wf_dir_local <- "~/flow/"
 envg$EXPENV$repo_dir <- "~/labo2024v1/"
