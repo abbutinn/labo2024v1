@@ -7,7 +7,9 @@ gc(full = TRUE) # garbage collection
 
 require("rlang")
 require("yaml")
-require("data.table")
+#require("data.table")
+library("data.table")
+
 require("ParamHelpers")
 
 # creo environment global
