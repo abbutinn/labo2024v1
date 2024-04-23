@@ -257,9 +257,9 @@ HT_tuning_guantesblancos <- function( pmyexp, pinputexps, pserver="local")
     num_iterations = 9999, # un numero muy grande, lo limita early_stopping_rounds
 
     bagging_fraction = 1.0, # 0.0 < bagging_fraction <= 1.0
-    pos_bagging_fraction = 1.0, # 0.0 < pos_bagging_fraction <= 1.0
-    neg_bagging_fraction = 1.0, # 0.0 < neg_bagging_fraction <= 1.0
-    is_unbalance = FALSE, #
+    pos_bagging_fraction = c( 0.02, 1.0 ),#,1.0, # 0.0 < pos_bagging_fraction <= 1.0
+    neg_bagging_fraction = c( 0.1, 1.0 ),#1.0, # 0.0 < neg_bagging_fraction <= 1.0
+    is_unbalance = TRUE, #
     scale_pos_weight = 1.0, # scale_pos_weight > 0.0
 
     drop_rate = 0.1, # 0.0 < neg_bagging_fraction <= 1.0
