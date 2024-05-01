@@ -6,7 +6,7 @@ rm(list = ls()) # Borro todos los objetos
 gc() # Garbage Collection
 
 require("data.table")
-
+library("data.table")
 require("rpart")
 require("parallel")
 
@@ -15,7 +15,7 @@ PARAM <- list()
 # semilla nerio 141223, 258113, 270131, 686087, 832969 , otra mayor-> 300089, 320057, 320027, 320009, 320039
 # reemplazar por las propias semillas
 PARAM$semillas <- c(101197, 102103, 103159, 104681, 999983) #141223, 270131, 320027, 103159, 999983) #c(101197, 102103, 103159, 104681, 999983)
-
+##semillas eli 127291, 288679, 564521, 731731, 859433 
 #------------------------------------------------------------------------------
 # particionar agrega una columna llamada fold a un dataset
 #  que consiste en una particion estratificada segun agrupa
@@ -53,10 +53,9 @@ ArbolEstimarGanancia <- function(semilla, param_basicos) {
     type = "prob"
   ) # type= "prob"  es que devuelva la probabilidad
 
-  # prediccion es una matriz con 2 columnas,
+      # prediccion es una matriz con 2 columnas,
   #  llamadas "suma"y "resta" por la modificacion de la clase clase_binaria1 
   # cada columna es el vector de probabilidades
-
 
   # calculo la ganancia en testing  qu es fold==2
   ganancia_test <- dataset2[
@@ -82,6 +81,7 @@ ArbolesMontecarlo <- function(semillas, param_basicos) {
     MoreArgs = list(param_basicos), # aqui paso el segundo parametro
     SIMPLIFY = FALSE,
     mc.cores = 5 # en Windows este valor debe ser 1
+
   )
 
   ganancia_promedio <- mean(unlist(ganancias))
@@ -100,6 +100,8 @@ crear_clase_binaria <- function(dt) {
     clase_ternaria == "CONTINUA", "RESTA",
     default = NA_character_  # Esto deja la fila vacía si ninguna condición se cumple
   )]
+  
+  set(dataset2, j = "clase_ternaria" , value = NULL )
   
   return(dataset2)
 
@@ -132,7 +134,7 @@ dataset2 <- dataset2[clase_binaria1 != ""]
 # HT  representa  Hiperparameter Tuning
 dir.create("./exp/", showWarnings = FALSE)
 dir.create("./exp/HT2020/", showWarnings = FALSE)
-archivo_salida <- "./exp/HT2020/gridsearch_binaria1.txt"
+archivo_salida <- "./exp/HT2020/gridsearch_binaria1_sinternaria_1.txt"
 
 # genero la data.table donde van los resultados del Grid Search
 tb_grid_search <- data.table( 
@@ -148,10 +150,10 @@ tb_grid_search <- data.table(
 
 # itero por los loops anidados para cada hiperparametro
 ### -0.99, 
-for(vcp in c(-0.95,-.87,-.43)){
-  for (vmax_depth in c(4,7,12))  #7,
-    for (vmin_split in c(34,220,888,889,878) ) # 912?, 12,23,133))
-      for (vmin_bucket in c(15,279,284,431))# min_split/4)) ##270))
+for(vcp in c(-0.33)){
+  for (vmax_depth in c(7,8,10))  #7,
+    for (vmin_split in c(430,892,1223,1556)) #,23,133,432,1956) ) # 912?, 12,23,133))
+      for (vmin_bucket in c(211,353,724))## ,15,23,212,724,834))# min_split/4)) ##270))
       {
     # notar como se agrega
 
@@ -180,4 +182,5 @@ for(vcp in c(-0.95,-.87,-.43)){
           file = archivo_salida,
           sep = "\t" )
 }
+
 

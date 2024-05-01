@@ -14,7 +14,7 @@ PARAM <- list()
 #141223 
 # semilla nerio 141223, 258113, 270131, 686087, 832969 , otra mayor-> 300089, 320057, 320027, 320009, 320039
 # reemplazar por las propias semillas
-PARAM$semillas <- c(101197, 102103, 103159, 104681, 999983) #141223, 270131, 320027, 103159, 999983) #c(101197, 102103, 103159, 104681, 999983)
+PARAM$semillas <- c(102103) #101197, 102103, 103159, 104681, 999983) #141223, 270131, 320027, 103159, 999983) #c(101197, 102103, 103159, 104681, 999983)
 ## semillas eli 127291, 288679, 564521, 731731, 859433
 #------------------------------------------------------------------------------
 # particionar agrega una columna llamada fold a un dataset
@@ -108,7 +108,7 @@ dataset <- dataset[clase_ternaria != ""]
 # HT  representa  Hiperparameter Tuning
 dir.create("./exp/", showWarnings = FALSE)
 dir.create("./exp/HT2020/", showWarnings = FALSE)
-archivo_salida <- "./exp/HT2020/gridsearch_ELI1.txt"
+archivo_salida <- "./exp/HT2020/gridsearch_meh.txt"
 
 # genero la data.table donde van los resultados del Grid Search
 tb_grid_search <- data.table( 
@@ -125,9 +125,9 @@ tb_grid_search <- data.table(
 # itero por los loops anidados para cada hiperparametro
 ### -0.99, 
 for(vcp in c(-0.5 )) { #,-.87,-.43)){
-  for (vmax_depth in c(6 )) #,7,12))  #7,
-    for (vmin_split in c(600 )) #,220,888,889,878) ) # 912?, 12,23,133))
-      for (vmin_bucket in c(150)) #,279,284,431))# min_split/4)) ##270))
+  for (vmax_depth in c(5)) #,7,12))  #7,
+    for (vmin_split in c(900 )) #,220,888,889,878) ) # 912?, 12,23,133))
+      for (vmin_bucket in c(440)) #,279,284,431))# min_split/4)) ##270))
       {
     # notar como se agrega
 
