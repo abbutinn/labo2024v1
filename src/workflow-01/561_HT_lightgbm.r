@@ -90,7 +90,7 @@ fganancia_lgbm_meseta <- function(probs, datos) {
   GLOBAL_arbol <<- GLOBAL_arbol + 1
   tbl <- as.data.table(list(
     "prob" = probs,
-    "gan" = ifelse(vlabels == 1 & vpesos > 1, 117000, -3000)
+    "gan" = ifelse(vlabels == 1, ifelse( vpesos > 1, 117000, -3000), ifelse(vpesos>1,-117000,0))
   ))
 
   setorder(tbl, -prob)
@@ -230,10 +230,7 @@ fganancia_lgbm_mesetaCV <- function(probs, datos) {
 
   tbl <- as.data.table(list(
     "prob" = probs,
-    "gan" = ifelse(vlabels == 1 & vpesos > 1,
-      117000,
-      -3000
-    )
+    "gan" = ifelse(vlabels == 1, ifelse(vpesos > 1, 117000,-3000), ifelse(vpesos>1,-117000,0))
   ))
 
   setorder(tbl, -prob)
