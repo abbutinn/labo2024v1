@@ -223,6 +223,12 @@ EstimarGanancia_lightgbm <- function(x) {
 vcant_optima <- c()
 
 fganancia_lgbm_mesetaCV <- function(probs, datos) {
+  print("Columnas en 'datos':")
+  print(colnames(datos))
+
+  print("Primeras filas de 'datos':")
+  print(head(datos))
+
   vlabels <- get_field(datos, "label")
   vpesos <- get_field(datos, "weight")
 
@@ -230,9 +236,10 @@ fganancia_lgbm_mesetaCV <- function(probs, datos) {
 
   tbl <- as.data.table(list(
     "prob" = probs,
-    "gan" = ifelse(vlabels == 1 & vpesos > 1,
+    "gan" = ifelse(vlabels == 1 & vpesos > 1, ###como agrego aca para ddiferenciar pesos entre 1 y 1.00000001 del baja+1
       117000,
       -3000
+      # 
     )
   ))
 
@@ -478,7 +485,9 @@ cat(PARAM$exp_input,
 )
 
 # defino la clase binaria clase01
-dataset[, clase01 := ifelse(clase_ternaria == "CONTINUA", 0L, 1L)]
+dataset[, clase01 := ifelse(clase_ternaria == "CONTINUA", 0L, 1L)] ## original
+
+
 
 
 # los campos que se pueden utilizar para la prediccion
