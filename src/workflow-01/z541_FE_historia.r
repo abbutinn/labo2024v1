@@ -204,7 +204,7 @@ AgregaVarRandomForest <- function(
     num.trees, max.depth,
     min.node.size, mtry, semilla) {
   gc()
-  dataset[, clase01 := ifelse(clase_ternaria == "CONTINUA", 0, 1)]
+  dataset[, clase01 := ifelse(clase_ternaria == "CONTINUA", 0, 1)] #### aca no se puede hacer
 
   campos_buenos <- setdiff(colnames(dataset), c("clase_ternaria"))
 
@@ -237,7 +237,7 @@ AgregaVarRandomForest <- function(
     min.node.size = min.node.size,
     mtry = mtry,
     seed = semilla,
-    num.threads = 1
+    num.threads = 24
   )
 
   rfhojas <- predict(
@@ -372,7 +372,7 @@ CanaritosAsesinos <- function(
     min_data_in_leaf = 260,
     num_leaves = 60,
     early_stopping_rounds = 200,
-    num_threads = 1
+    num_threads = 20
   )
 
   set.seed(canaritos_semilla, kind = "L'Ecuyer-CMRG")

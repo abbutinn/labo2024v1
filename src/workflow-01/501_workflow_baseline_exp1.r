@@ -274,7 +274,8 @@ HT_tuning_guantesblancos <- function( pmyexp, pinputexps, pserver="local")
     learning_rate = c( 0.01, 0.3 ),
     feature_fraction = c( 0.5, 0.9 ),
     num_leaves = c(1000L, 2048L, "integer" ), #c( 300L, 1024L,  "integer" ), 
-    min_data_in_leaf = c( 1000L, 10000L, "integer" ) # c( 100L, 2000L, "integer" )
+    min_data_in_leaf = c( 1000L, 10000L, "integer" ),
+    num_threads = 20 # c( 100L, 2000L, "integer" )
   )
 
 
