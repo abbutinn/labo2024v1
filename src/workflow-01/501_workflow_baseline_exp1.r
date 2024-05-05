@@ -260,7 +260,7 @@ HT_tuning_guantesblancos <- function( pmyexp, pinputexps, pserver="local")
 
     bagging_fraction = 1.0, # 0.0 < bagging_fraction <= 1.0
     pos_bagging_fraction = c(0.1,1.0),#1.0, # 0.0 < pos_bagging_fraction <= 1.0
-    neg_bagging_fraction = c(0.1,1.0) #0.1, # 0.0 < neg_bagging_fraction <= 1.0
+    neg_bagging_fraction = c(0.1,1.0), #0.1, # 0.0 < neg_bagging_fraction <= 1.0
     is_unbalance = FALSE, #
     scale_pos_weight = c(0.5, 1.1), #)1.0, # scale_pos_weight > 0.0
 
