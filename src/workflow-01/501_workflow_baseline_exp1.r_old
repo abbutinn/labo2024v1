@@ -14,7 +14,7 @@ require("ParamHelpers")
 envg <- env()
 
 envg$EXPENV <- list()
-envg$EXPENV$exp_dir <- "~/buckets/b1/exp/colaborativos/baseline/"
+envg$EXPENV$exp_dir <- "~/buckets/b1/exp/agu_baseline_exp1/"
 envg$EXPENV$wf_dir <- "~/buckets/b1/flow/"
 envg$EXPENV$wf_dir_local <- "~/flow/"
 envg$EXPENV$repo_dir <- "~/labo2024v1/"
@@ -22,8 +22,8 @@ envg$EXPENV$datasets_dir <- "~/buckets/b1/datasets/"
 envg$EXPENV$arch_sem <- "mis_semillas.txt"
 
 # default
-envg$EXPENV$gcloud$RAM <- 200
-envg$EXPENV$gcloud$cCPU <- 24
+envg$EXPENV$gcloud$RAM <- 256
+envg$EXPENV$gcloud$cCPU <- 32
 
 #------------------------------------------------------------------------------
 # Error catching
@@ -181,10 +181,10 @@ TS_strategy_guantesblancos_202109 <- function( pmyexp, pinputexps, pserver="loca
 
 
   param_local$future <- c(202109)
-  param_local$final_train <- c(202107, 202106, 202105, 202104, 202103, 202102, 202101, 202012, 202011) #, 202006, 202005, 202004, 202003, 202002, 202001, 201912, 201911, 201910, 201909, 201908, 201907, 201906, 201905, 201904, 201903, 201902, 201901)#c(202107, 202106, 202105) #aca usamos para el future (que es lo de kaggle)
+  param_local$final_train <- c(202107, 202106, 202105, 202104, 202103, 202102, 202101, 202012, 202011, 202010, 202009, 202008, 202007) #, 202006, 202005, 202004, 202003, 202002, 202001, 201912, 201911, 201910, 201909, 201908, 201907, 201906, 201905, 201904, 201903, 201902, 201901)#c(202107, 202106, 202105) #aca usamos para el future (que es lo de kaggle)
 
 
-  param_local$train$training <- c(202105, 202104, 202103, 202102, 202101,202012, 202011, 202010, 202009)#, 202008, 202007)#, 202006, 202005, 202004, 202003, 202002, 202001, 201912, 201911, 201910, 201909, 201908, 201907, 201906, 201905, 201904, 201903, 201902, 201901)#c(202105, 202104, 202103) #todo esto es para la bayesana (hay que poner mas meses.)
+  param_local$train$training <- c(202105, 202104, 202103, 202102, 202101,202012, 202011, 202010, 202009, 202008, 202007)#, 202006, 202005, 202004, 202003, 202002, 202001, 201912, 201911, 201910, 201909, 201908, 201907, 201906, 201905, 201904, 201903, 201902, 201901)#c(202105, 202104, 202103) #todo esto es para la bayesana (hay que poner mas meses.)
   param_local$train$validation <- c(202106)
   param_local$train$testing <- c(202107) ##aca es el testing, conozco la clase por eso puedo ver la ganancia 
 
@@ -253,16 +253,16 @@ HT_tuning_guantesblancos <- function( pmyexp, pinputexps, pserver="local")
     max_depth = -1L, # -1 significa no limitar,  por ahora lo dejo fijo
     min_gain_to_split = 0.0, # min_gain_to_split >= 0.0
     min_sum_hessian_in_leaf = 0.001, #  min_sum_hessian_in_leaf >= 0.0
-    lambda_l1 = 0.0,#c(0.1, 2.0),#0.0, # lambda_l1 >= 0.0
+    lambda_l1 = c(0.1, 2.0),#0.0, # lambda_l1 >= 0.0
     lambda_l2 = 0.0, # lambda_l2 >= 0.0
     max_bin = 31L, # lo debo dejar fijo, no participa de la BO
     num_iterations = 9999, # un numero muy grande, lo limita early_stopping_rounds
 
     bagging_fraction = 1.0, # 0.0 < bagging_fraction <= 1.0
-    pos_bagging_fraction = 1.0,#c(0.7,1.0),#1.0, # 0.0 < pos_bagging_fraction <= 1.0
-    neg_bagging_fraction = 1.0,#c(0.3,0.6), #0.1, # 0.0 < neg_bagging_fraction <= 1.0
+    pos_bagging_fraction = c(0.1,1.0),#1.0, # 0.0 < pos_bagging_fraction <= 1.0
+    neg_bagging_fraction = c(0.1,1.0), #0.1, # 0.0 < neg_bagging_fraction <= 1.0
     is_unbalance = FALSE, #
-    scale_pos_weight = 1.0,# c(1, 99), #)1.0, # scale_pos_weight > 0.0
+    scale_pos_weight = c(0.5, 1.1), #)1.0, # scale_pos_weight > 0.0
 
     drop_rate = 0.1, # 0.0 < neg_bagging_fraction <= 1.0
     max_drop = 50, # <=0 means no limit
@@ -271,10 +271,10 @@ HT_tuning_guantesblancos <- function( pmyexp, pinputexps, pserver="local")
     extra_trees = FALSE,
     # White Gloves Bayesian Optimization, with a happy narrow exploration 
     ####estoos son los mas importantes. con estos 4 esta bien. 
-    learning_rate = c( 0.01, 0.5 ),
+    learning_rate = c( 0.01, 0.3 ),
     feature_fraction = c( 0.5, 0.9 ),
-    num_leaves = c(8L, 2048L, "integer" ), #c(1000L, 2048L, "integer" ), #c( 300L, 1024L,  "integer" ), 
-    min_data_in_leaf = c( 100L, 2000L, "integer" ), #c( 1000L, 10000L, "integer" ),
+    num_leaves = c(1000L, 2048L, "integer" ), #c( 300L, 1024L,  "integer" ), 
+    min_data_in_leaf = c( 1000L, 10000L, "integer" ),
     num_threads = 20 # c( 100L, 2000L, "integer" )
   )
 

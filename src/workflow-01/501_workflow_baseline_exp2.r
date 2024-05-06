@@ -1,5 +1,8 @@
 # Corrida general del Workflow de Guantes Blancos
 # para aprender lo conceptual, sin ensuciarse las manos
+###experimento2 
+#modificamos -> scale_pos_weight = c(1L, 99L)
+
 
 # limpio la memoria
 rm(list = ls(all.names = TRUE)) # remove all objects
@@ -14,7 +17,7 @@ require("ParamHelpers")
 envg <- env()
 
 envg$EXPENV <- list()
-envg$EXPENV$exp_dir <- "~/buckets/b1/exp/colaborativos/baseline/"
+envg$EXPENV$exp_dir <- "~/buckets/b1/exp/colaborativos/exp2/"
 envg$EXPENV$wf_dir <- "~/buckets/b1/flow/"
 envg$EXPENV$wf_dir_local <- "~/flow/"
 envg$EXPENV$repo_dir <- "~/labo2024v1/"
@@ -181,7 +184,7 @@ TS_strategy_guantesblancos_202109 <- function( pmyexp, pinputexps, pserver="loca
 
 
   param_local$future <- c(202109)
-  param_local$final_train <- c(202107, 202106, 202105, 202104, 202103, 202102, 202101, 202012, 202011) #, 202006, 202005, 202004, 202003, 202002, 202001, 201912, 201911, 201910, 201909, 201908, 201907, 201906, 201905, 201904, 201903, 201902, 201901)#c(202107, 202106, 202105) #aca usamos para el future (que es lo de kaggle)
+  param_local$final_train <- c(202107, 202106, 202105, 202104, 202103, 202102, 202101, 202012, 202011)#, 202010, 202009, 202008, 202007) #, 202006, 202005, 202004, 202003, 202002, 202001, 201912, 201911, 201910, 201909, 201908, 201907, 201906, 201905, 201904, 201903, 201902, 201901)#c(202107, 202106, 202105) #aca usamos para el future (que es lo de kaggle)
 
 
   param_local$train$training <- c(202105, 202104, 202103, 202102, 202101,202012, 202011, 202010, 202009)#, 202008, 202007)#, 202006, 202005, 202004, 202003, 202002, 202001, 201912, 201911, 201910, 201909, 201908, 201907, 201906, 201905, 201904, 201903, 201902, 201901)#c(202105, 202104, 202103) #todo esto es para la bayesana (hay que poner mas meses.)
@@ -262,7 +265,7 @@ HT_tuning_guantesblancos <- function( pmyexp, pinputexps, pserver="local")
     pos_bagging_fraction = 1.0,#c(0.7,1.0),#1.0, # 0.0 < pos_bagging_fraction <= 1.0
     neg_bagging_fraction = 1.0,#c(0.3,0.6), #0.1, # 0.0 < neg_bagging_fraction <= 1.0
     is_unbalance = FALSE, #
-    scale_pos_weight = 1.0,# c(1, 99), #)1.0, # scale_pos_weight > 0.0
+    scale_pos_weight = c(1L, 99L), #)1.0, # scale_pos_weight > 0.0
 
     drop_rate = 0.1, # 0.0 < neg_bagging_fraction <= 1.0
     max_drop = 50, # <=0 means no limit
