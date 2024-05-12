@@ -13,7 +13,7 @@ require("ParamHelpers")
 envg <- env()
 
 envg$EXPENV <- list()
-envg$EXPENV$exp_dir <- "~/buckets/b1/exp/semillero/"
+envg$EXPENV$exp_dir <- "~/buckets/b1/exp/semillero_0-5/"
 envg$EXPENV$wf_dir <- "~/buckets/b1/flow/"
 envg$EXPENV$wf_dir_local <- "~/flow/"
 envg$EXPENV$repo_dir <- "~/labo2024v1/"
@@ -144,7 +144,7 @@ FE_historia_baseline <- function( pmyexp, pinputexps, pserver="local")
   param_local$RandomForest$mtry <- 40
 
   # varia de 0.0 a 2.0, si es 0.0 NO se activan
-  param_local$CanaritosAsesinos$ratio <- 0.0
+  param_local$CanaritosAsesinos$ratio <- 0.1
   # desvios estandar de la media, para el cutoff
   param_local$CanaritosAsesinos$desvios <- 4.0
 
@@ -171,7 +171,7 @@ TS_strategy_baseline_202109 <- function( pmyexp, pinputexps, pserver="local")
   param_local$train$testing <- c(202107)
 
   # undersampling  baseline
-  param_local$train$undersampling <- 0.1
+  param_local$train$undersampling <- 0.5
 
   return( exp_correr_script( param_local ) ) # linea fija
 }
@@ -196,7 +196,7 @@ TS_strategy_baseline_202107 <- function( pmyexp, pinputexps, pserver="local")
   param_local$train$testing <- c(202105)
 
   # undersampling  baseline
-  param_local$train$undersampling <- 0.1
+  param_local$train$undersampling <- 0.5
 
   return( exp_correr_script( param_local ) ) # linea fija
 }
@@ -246,14 +246,14 @@ HT_tuning_baseline <- function( pmyexp, pinputexps, pserver="local")
     extra_trees = FALSE,
     # Quasi  baseline, el minimo learning_rate es 0.02 !!
     learning_rate = 1.0,#c( 0.02, 0.5 ),
-    feature_fraction = c( 0.4, 0.5 ),
-    num_leaves = c( 40L, 50L,  "integer" ),
-    min_data_in_leaf = c( 4800L, 5200L, "integer" )
+    feature_fraction = 0.4, #c( 0.4, 0.5 ),
+    num_leaves = 40, #c( 40L, 50L,  "integer" ),
+    min_data_in_leaf = 5000 #c( 4800L, 5200L, "integer" )
   )
 
 
   # una Beyesian de Guantes Blancos, solo hace 15 iteraciones
-  param_local$bo_iteraciones <- 200 # iteraciones de la Optimizacion Bayesiana
+  param_local$bo_iteraciones <- 100 # iteraciones de la Optimizacion Bayesiana
 
   return( exp_correr_script( param_local ) ) # linea fija
 }
