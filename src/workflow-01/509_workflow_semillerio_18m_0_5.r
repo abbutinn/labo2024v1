@@ -247,8 +247,8 @@ HT_tuning_baseline <- function( pmyexp, pinputexps, pserver="local")
     # Quasi  baseline, el minimo learning_rate es 0.02 !!
     learning_rate = 1.0,#c( 0.02, 0.5 ),
     feature_fraction = 0.4, #c( 0.4, 0.5 ),
-    num_leaves = 40, #c( 40L, 50L,  "integer" ),
-    min_data_in_leaf = 5000 #c( 4800L, 5200L, "integer" )
+    num_leaves = 40L, #c( 40L, 50L,  "integer" ),
+    min_data_in_leaf = 5000L #c( 4800L, 5200L, "integer" )
   )
 
 
@@ -270,7 +270,7 @@ ZZ_final_baseline <- function( pmyexp, pinputexps, pserver="local")
   param_local$modelos_rank <- c(1)
 
   param_local$kaggle$envios_desde <-  9500L
-  param_local$kaggle$envios_hasta <- 11500L
+  param_local$kaggle$envios_hasta <- 13500L
   param_local$kaggle$envios_salto <-   500L
 
   # para el caso que deba graficar
@@ -279,7 +279,7 @@ ZZ_final_baseline <- function( pmyexp, pinputexps, pserver="local")
   param_local$graficar$ventana_suavizado <- 2001L
 
   # Una corrida de Guantes Blancos solo usa 5 semillas
-  param_local$qsemillas <- 100
+  param_local$qsemillas <- 15
 
   return( exp_correr_script( param_local ) ) # linea fija
 }
