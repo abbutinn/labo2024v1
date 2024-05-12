@@ -296,7 +296,7 @@ ZZ_final_semillerio_baseline <- function( pmyexp, pinputexps, pserver="local")
   param_local$modelos_rank <- c(1)
 
   param_local$kaggle$envios_desde <-  9500L
-  param_local$kaggle$envios_hasta <- 11500L
+  param_local$kaggle$envios_hasta <- 13500L
   param_local$kaggle$envios_salto <-   500L
 
   # para el caso que deba graficar
@@ -379,6 +379,6 @@ corrida_baseline_semillerio_202109( "basem01" )
 # Luego partiendo de  FE0001
 # genero TS0002, HT0002 y ZZ0002
 
-#corrida_baseline_semillerio_202107( "basem02" )
+corrida_baseline_semillerio_202107( "basem02" )
 
  
