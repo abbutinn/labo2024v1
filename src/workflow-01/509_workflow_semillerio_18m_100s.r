@@ -13,7 +13,7 @@ require("ParamHelpers")
 envg <- env()
 
 envg$EXPENV <- list()
-envg$EXPENV$exp_dir <- "~/buckets/b1/exp/semillero_0-5/"
+envg$EXPENV$exp_dir <- "~/buckets/b1/exp/semillero/"
 envg$EXPENV$wf_dir <- "~/buckets/b1/flow/"
 envg$EXPENV$wf_dir_local <- "~/flow/"
 envg$EXPENV$repo_dir <- "~/labo2024v1/"
@@ -171,7 +171,7 @@ TS_strategy_baseline_202109 <- function( pmyexp, pinputexps, pserver="local")
   param_local$train$testing <- c(202107)
 
   # undersampling  baseline
-  param_local$train$undersampling <- 0.5
+  param_local$train$undersampling <- 0.1
 
   return( exp_correr_script( param_local ) ) # linea fija
 }
@@ -196,7 +196,7 @@ TS_strategy_baseline_202107 <- function( pmyexp, pinputexps, pserver="local")
   param_local$train$testing <- c(202105)
 
   # undersampling  baseline
-  param_local$train$undersampling <- 0.5
+  param_local$train$undersampling <- 0.1
 
   return( exp_correr_script( param_local ) ) # linea fija
 }
@@ -270,7 +270,7 @@ ZZ_final_baseline <- function( pmyexp, pinputexps, pserver="local")
   param_local$modelos_rank <- c(1)
 
   param_local$kaggle$envios_desde <-  9500L
-  param_local$kaggle$envios_hasta <- 11500L
+  param_local$kaggle$envios_hasta <- 13500L
   param_local$kaggle$envios_salto <-   500L
 
   # para el caso que deba graficar
@@ -296,7 +296,7 @@ ZZ_final_semillerio_baseline <- function( pmyexp, pinputexps, pserver="local")
   param_local$modelos_rank <- c(1)
 
   param_local$kaggle$envios_desde <-  9500L
-  param_local$kaggle$envios_hasta <- 11500L
+  param_local$kaggle$envios_hasta <- 13500L
   param_local$kaggle$envios_salto <-   500L
 
   # para el caso que deba graficar
